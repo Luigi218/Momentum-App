@@ -27,5 +27,11 @@ body {
 #footer {
     display: flex;
     flex-direction: row;
-    margin-top: 30%;
+    margin-top: 392px;
+    justify-content: space-between;
+}
+
+.footer-container {
+    display: flex;
+    text-align: center;
 }
