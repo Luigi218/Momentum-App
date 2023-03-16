@@ -25,13 +25,16 @@ body {
 }
 
 #footer {
+    background-color: black;
+    color:antiquewhite;
     display: flex;
     flex-direction: row;
-    margin-top: 392px;
+    margin-top: 385px;
     justify-content: space-between;
 }
 
 .footer-container {
     display: flex;
+    flex-direction: column;
     text-align: center;
 }
