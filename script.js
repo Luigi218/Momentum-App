@@ -1,10 +1,19 @@
-//Real-Time Clock Function
+//Real-Time Clock Functions
+function checkTime(t) {
+    if (t < 10) {t = "0" + t};
+    return t;
+}
+
 function myTimer (){
     const date = new Date();
-    document.getElementById("clock").innerHTML = date.toLocaleTimeString();
+    let h = date.getHours();
+    let m = date.getMinutes();
+    let s = date.getSeconds();
+    m = checkTime(m)
+    s = checkTime(s)
+    document.getElementById("clock").innerHTML = h + ":" + m + ":" + s;
 } 
 
-//Update Time every second
 setInterval(myTimer,1000)
 
 //Background Images Array
@@ -14,7 +23,6 @@ const backgroundImages = [
     "url(assets/img3.jpg)"
 ]
 
-//Start Index at 0
 let img = 0;
 const background = document.querySelector("body")
 
@@ -34,7 +42,6 @@ window.onload = (
     background.style.backgroundSize = "cover"
 )
 
-//Update Background every minute
 setInterval(changeBackground, 60000)
 
 //Quotes Array
@@ -53,7 +60,6 @@ const quotesList = [
     }
 ]
 
-//Start Index at 0
 let i = 0
 const quoteText = document.getElementById("quote-text")
 const authorText = document.getElementById("author-text")
@@ -62,8 +68,18 @@ const authorText = document.getElementById("author-text")
 function changeQuote () {
     i++
     if (i === quotesList.length) {i = 0}
-    quoteText.textContent = quotesList[i].quote
-    authorText.textContent = quotesList[i].author
+    quoteText.innerHTML = quotesList[i].quote
+    authorText.innerHTML = quotesList[i].author
 }
 
 setInterval(changeQuote, 60000)
+
+//WIP Greeting Function
+const greeting = document.getElementById("greet-text")
+
+function firstName() {
+    const name = document.querySelector("input").value;
+    if (h < 12) {greeting.textContent = "Good Morning, " + name}
+    else if (h > 12 && h < 18) {greeting.textContent = "Good Afternoon, " + name}
+    else {greeting.textContent = "Good Evening, " + name}
+}
