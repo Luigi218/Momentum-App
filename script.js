@@ -40,15 +40,15 @@ setInterval(changeBackground, 60000)
 //Quotes Array
 const quotesList = [
     {
-        quote: "Words are not meant to sir the air only: they are capable of moving greater things",
+        quote: "Words are not meant to stir the air only; they are capable of moving greater things.",
         author: "Natsume Soseki"
     },
     {
-        quote: "I think that inside every adult is the heart of a child. We just gradually convince ourselves that we whave to act more like adults",
+        quote: "I think that inside every adult is the heart of a child. We just gradually convince ourselves that we whave to act more like adults.",
         author: "Shigeru Miyamoto"
     },
     {
-        quote: "The objective of clearning is not just to clean, but to feel happiness living within that environment",
+        quote: "The objective of cleaning is not just to clean, but to feel happiness living within that environment.",
         author: "Marie Kondo"
     }
 ]
@@ -62,7 +62,8 @@ const authorText = document.getElementById("author-text")
 function changeQuote () {
     i++
     if (i === quotesList.length) {i = 0}
-    
+    quoteText.textContent = quotesList[i].quote
+    authorText.textContent = quotesList[i].author
 }
 
-setInterval(changeQuote, 5000)
+setInterval(changeQuote, 60000)
