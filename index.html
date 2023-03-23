@@ -3,29 +3,41 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <link href="style.css" rel="stylesheet" type="text/css" />
+        <title>Momentum App</title>
     </head>
     <body id="background">
         <div class="container" id="name-container">
-            <form action="" method="post" id="form">
-                <br>
-                <label for="name-input" id="name-label">What is your name?</label>
-                <br>
-                <input type="text" id="name-input" name="name">
-            </form>
+            <div>
+                <label for="name-input" id="name-label"><h1>What is your name?</h1></label>
+            </div>
+            <div>
+                <input type="text" id="name-input" name="name" required>
+                <button type="submit" id="name-submit">Submit</button>    
+            </div>
         </div>
         <div class="container" id="clock"></div>
-        <div class="container"><p id="greet-text">Greeting</p></div>
+        <div id="greet-container">
+            <h1 id="greet-text"></h1>
+            <h1 id="greet-name"></h1>
+        </div>
+        <div id="edit-container">
+            <button type="submit" id="name-edit">Edit</button>
+        </div>
         <div id="footer">
-            <div class="footer-container"><p>Location</p></div>
-            <div class="footer-container">
-                <div>
-                    <p id="quote-text">Quotes</p>
-                </div>
-                <div>
-                    <p id="author-text">Author</p>
+            <div id = "quotes-display">
+                <div id="quotes-container">
+                    <h3 id="quote-text">Quotes</h3>
+                    <h3 id="author-text">Author</h3>                
                 </div>
             </div>
-            <div class="footer-container"><p>To-Do List</p></div>
+            <div id="todo-list-container">
+                <div id="todo-list" class="header">
+                    <h3>To-Do List</h3>
+                    <input type="text" id="listInput" placeholder="New Todo">
+                    <span onclick="newItem()" class="addBtn">Add</span>
+                </div>
+                <ul id="todo-list-ul"></ul>
+            </div>
         </div>
         <script src="script.js"></script>
     </body>
