@@ -1,4 +1,25 @@
-//Changing Background Script Start
+//Global Variables
+let img = 0;
+const background = document.querySelector("body")
+
+let num = 0
+const quoteText = document.getElementById("quote-text")
+const authorText = document.getElementById("author-text")
+
+let clock = document.getElementById("clock")
+
+const bg = document.querySelector("body")
+var button = document.getElementById("listButton");
+var modal = document.getElementById("listModal");
+
+let form = document.getElementById("name-form")
+let submit = document.getElementById("name-submit")
+let nameGreeted = document.getElementById("greet-name");
+
+let edit = document.getElementById("edit-container")
+let editContent = document.getElementById("name-edit")
+
+//Changing Background Script
 const backgroundImages = [
     "url(assets/img1.jpg)", 
     "url(assets/img2.jpg)", 
@@ -6,21 +27,15 @@ const backgroundImages = [
 ]
 
 //Changing Background Function
-let img = 0;
-const background = document.querySelector("body")
-
 function changeBackground () {
         img++
         if (img === backgroundImages.length) {img = 0}
         background.style.backgroundImage = backgroundImages[img]
-        background.style.backgroundRepeat = "no-repeat"
-        background.style.backgroundSize = "cover"
 }
 
 setInterval(changeBackground, 60000)
-//Changing Background Script End
 
-//Changing Quote Script Start
+//Changing Quote Script
 let quoteDisplay = document.getElementById("quotes-display")
 const quotesList = [
     {
@@ -38,10 +53,6 @@ const quotesList = [
 ]
 
 //Changing Quotes Function
-let num = 0
-const quoteText = document.getElementById("quote-text")
-const authorText = document.getElementById("author-text")
-
 function changeQuote () {
     num++
     if (num === quotesList.length) {num = 0}
@@ -50,10 +61,8 @@ function changeQuote () {
 }
 
 setInterval(changeQuote, 60000)
-//Changing Quote Script End
 
-//Real-Time Clock Script Start
-let clock = document.getElementById("clock")
+//Real-Time Clock Script
 
 //Changes 1-digit numbers to 2-digits 
 function checkTime(t) {
@@ -73,61 +82,77 @@ function myTimer (){
 } 
 
 setInterval(myTimer,1000)
-//Real-Time Clock Script End
 
-//Todo List Script Start
-let listContainer = document.getElementById("todo-list-container")
+//Todo List Script 
+button.addEventListener("click",function () {
+        modal.style.display = "block";
+})
 
-//Add a close button to each list item
-let myNodelist = document.getElementsByTagName("LI")
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-    var span = document.createElement("SPAN")
-    var txt = document.createTextNode("\u00D7");
-    span.className = "close";
-    span.appendChild(txt);
-    myNodelist[i].appendChild(span)
-}
-
-//Click on close to remove selected list item
-let close = document.getElementsByClassName("close")
-var i;
-for (i = 0; i < close.length; i++) {
-    close[i].onclick = function () {
-        var div = this.parentElement;
-        div.style.display = "none"
+window.addEventListener("click", function(event) {
+    if (event.target === bg) {
+        modal.style.display = "none";
+        nameGreeted.contentEditable = "false";
+        input.contentEditable = "false";
     }
-}
-
-//Add a checked symbol when list item is clicked
-var list = document.querySelector("ul")
-list.addEventListener("click", function(ev) {
-    if (ev.target.tagName === "LI") {
-        ev.target.classList.toggle("checked");
-        }
-    }, false
-);
+})
 
 //Create new item when "Add" button is clicked
 function newItem () {
     var li = document.createElement("li");
+    var checkBox = document.createElement("input");
     var inputValue = document.getElementById("listInput").value;
-    var t = document.createTextNode(inputValue);
-    li.appendChild(t);
+    var input = document.createElement("SPAN");
+    input.innerHTML = inputValue
+    checkBox.type = "checkbox";
+    
+    li.appendChild(checkBox)
+    li.appendChild(input);
     if (inputValue === "") {
-        alert ("Required");
+        alert ("What do you want to do today?");
     }
     else {
         document.getElementById("todo-list-ul").appendChild(li);
     }
     document.getElementById("listInput").value = "";
+    
+    //Add a checked symbol when list item is clicked
+    checkBox.addEventListener("click", function() {
+        li.classList.toggle("checked");
+            }
+        )
 
+    //Add an edit button to each list item
+    var listEdit = document.createElement("SPAN");
+    var editText = document.createTextNode("Edit");
+    listEdit.className = "edit";
+    listEdit.appendChild(editText);
+    li.appendChild(listEdit);
+
+    //Click on edit to make todo editable
+    let edit = document.getElementsByClassName("edit")
+    var i;
+    for (i = 0; i < edit.length; i++) {
+        edit[i].onclick = function () {
+            input.contentEditable = "true";
+        }
+    }
+
+    window.addEventListener("click", function(event) {
+        if (event.target === bg) {
+            input.contentEditable = "false";
+        }
+    })
+    
+    //Add a close button to each list item
     var span = document.createElement("SPAN");
     var txt = document.createTextNode("\u00D7");
     span.className = "close";
     span.appendChild(txt);
     li.appendChild(span);
-
+    
+    //Click on close to remove selected list item
+    let close = document.getElementsByClassName("close")
+    var i;
     for (i = 0; i < close.length; i++) {
         close[i].onclick = function () {
             var div = this.parentElement;
@@ -135,13 +160,16 @@ function newItem () {
         }
     }
 }
-//Todo List Script End
 
 //Greeting Script Start
-let submit = document.getElementById("name-submit")
+function submitForm (event) {
+    event.preventDefault();
+}
 
-submit.onclick = function greetName () {
-    let greet = document.getElementById("greet-text");
+form.addEventListener("submit",submitForm);
+
+form.addEventListener("submit",function greetName () {
+    let greeting = document.getElementById("greet-text");
     let name = document.getElementById("name-input");
     let nameValue = document.getElementById("name-input").value;
     let question = document.getElementById("name-label");
@@ -150,35 +178,35 @@ submit.onclick = function greetName () {
 
     if (nameValue === "") {return};
 
+    if (h >= 0 && h < 12) {greeting.innerHTML = "Good Morning," + "&nbsp;"}
+    else if (h >= 12 && h < 18) {greeting.innerHTML = "Good Afternoon" + "&nbsp;"}
+    else if (h >= 18 && h < 24) {greeting.innerHTML = "Good Evening" + "&nbsp;"}
+    else {greeting.innerHTML = "Hello" + "&nbsp;"};
+    nameGreeted.innerHTML = nameValue;
+    localStorage.setItem("name", nameValue);
+    
+    clock.style.display = "block";
     question.style.display = "none";
     name.style.display = "none";
-    submit.style.display = "none";
-    
-    if (h > 0 && h < 12) {greet.innerHTML = "Good Morning, " + nameValue}
-    else if (h > 12 && h < 18) {greet.innerHTML = "Good Afternoon, " + nameValue}
-    else if (h > 18 && h < 24) {greet.innerHTML = "Good Evening, " + nameValue}
-    else {greet.innerHTML = "Hello, " + nameValue}
-
-    clock.style.display = "block";
     quoteDisplay.style.display = "block";
-    listContainer.style.display = "block";
     quoteText.innerHTML = quotesList[0].quote;
-    authorText.innerHTML = quotesList[0].author;
+    authorText.innerHTML = quotesList[0].author
     edit.style.display = "flex";
-}
-//Greeting Script End
+    button.style.display = "block";
+})
 
 //Edit Name Script Start
-let edit = document.getElementById("edit-container")
-
-edit.onclick = function editName() {
-    let name = document.getElementById("name-input");
-    name.contentEditable === "true";
+editContent.onclick = function editName() {
+    nameGreeted.contentEditable = "true";
 }
 
 //Initial Load in
-window.onload = (
-    background.style.backgroundImage = backgroundImages[0],
-    background.style.backgroundRepeat = "no-repeat",
-    background.style.backgroundSize = "cover"
-)
+var storedName = localStorage.getItem("name")
+
+window.onload = function loadin () {
+    background.style.backgroundImage = backgroundImages[0];
+    if (localStorage.getItem("name")) {
+        storedName = nameValue;
+        greetName();
+    }
+}

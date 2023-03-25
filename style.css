@@ -2,13 +2,26 @@
     box-sizing: border-box;
 }
 
-body, ul {
+/*General CSS*/
+body {
+    margin: 0;
+    padding: 0;
+    background-size:cover;
+    background-repeat: no-repeat;
+}
+
+ul {
     margin: 0;
     padding: 0;
 }
 
 h1, h3 {
     font-weight: normal;
+}
+
+/*Name, Greeting, Clock, Quotes, CSS*/
+input[type=text], textarea {
+    background-color: inherit;
 }
 
 .container {
@@ -34,10 +47,12 @@ h1, h3 {
     font-size: xx-large;
     text-align: center;
     width: 300px;
+    color: white;
     background-color: inherit;
-    border-top: white;
-    border-left: white;
-    border-right: white;
+    border-radius: 4px 4px;
+    border-top: hidden;
+    border-left: hidden;
+    border-right: hidden;
 }
 
 #name-submit {
@@ -57,9 +72,12 @@ h1, h3 {
     display: flex;
     justify-content: center;
     text-align: center;
-    margin-left: 50vw;
-    margin-right: 50vw;
+    margin-left: 47vw;
+    margin-right: 4vw;
     width: 100px;
+    color: white;
+    background-color: inherit;
+    border-style: hidden;
 }
 
 #greet-container {
@@ -86,24 +104,65 @@ h1, h3 {
     flex-direction: column;
     text-align: left;
     position: fixed;
-    left: 0;
+    left: 2%;
     bottom: 0;
+}
+
+#quote-text {
+    width: 50vw;
+}
+
+/*Todo List CSS*/
+#listButton {
+    display: none;
+    bottom: 5%;
+    right: 5%;
+    position: fixed;
+    background-color: inherit;
+    color: white;
+    font-size: large;
+    border-style: hidden;
+}
+
+#listModal {
+    display: none;
+    position: fixed;
+    bottom: 10%;
+    right: 1px;
+}
+
+#listModal::after{
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 75%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+#listInput {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    width: 75%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+    background-color: inherit;
+    color: white;
 }
 
 #todo-list-container {
-    display: none;
-    position: fixed;
-    right: 0;
-    bottom: 0;
+    background-color: #555;
     text-align: left;
 }
-
-/*Todo List CSS Start*/
 
 ul li {
     cursor: pointer;
     position: relative;
-    padding: 12px 8px 12px 40px;
+    padding: 12px 8px 12px 30px;
     background: transparent;
     font-size: 18px;
     transition: 0.2s;
@@ -124,17 +183,16 @@ ul li.checked {
     text-decoration: line-through;
 }
 
-ul li.checked::before {
-    content: '';
+.edit {
     position: absolute;
-    border-color: #fff;
-    border-style: solid;
-    border-width: 0 2px 2px 0;
-    top: 10px;
-    left: 16px;
-    transform: rotate(45deg);
-    height: 15px;
-    width: 7px;
+    right: 15%;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+}
+
+.edit:hover {
+    background-color: darkgoldenrod;
+    color: white;
 }
 
 .close {
@@ -151,7 +209,7 @@ ul li.checked::before {
 
 .header {
     background-color: transparent;
-    padding: 30px 40px;
+    padding: 10px 20px;
     color: white;
     text-align: center;
 }
@@ -160,17 +218,6 @@ ul li.checked::before {
     content: "";
     display: table;
     clear: both;
-}
-
-#listInput {
-    margin: 0;
-    border: none;
-    border-radius: 0;
-    width: 75%;
-    padding: 10px;
-    float: left;
-    font-size: 16px;
-    background-color: inherit;
 }
 
 .addBtn {

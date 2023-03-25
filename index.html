@@ -11,8 +11,10 @@
                 <label for="name-input" id="name-label"><h1>What is your name?</h1></label>
             </div>
             <div>
-                <input type="text" id="name-input" name="name" required>
-                <button type="submit" id="name-submit">Submit</button>    
+                <form id="name-form">
+                    <input type="text" id="name-input" name="name" required>
+                    <input type="submit" id="name-submit" hidden/>    
+                </form>
             </div>
         </div>
         <div class="container" id="clock"></div>
@@ -21,7 +23,7 @@
             <h1 id="greet-name"></h1>
         </div>
         <div id="edit-container">
-            <button type="submit" id="name-edit">Edit</button>
+            <button type="submit" id="name-edit">Edit Name</button>
         </div>
         <div id="footer">
             <div id = "quotes-display">
@@ -30,14 +32,16 @@
                     <h3 id="author-text">Author</h3>                
                 </div>
             </div>
-            <div id="todo-list-container">
-                <div id="todo-list" class="header">
-                    <h3>To-Do List</h3>
-                    <input type="text" id="listInput" placeholder="New Todo">
-                    <span onclick="newItem()" class="addBtn">Add</span>
-                </div>
-                <ul id="todo-list-ul"></ul>
-            </div>
+            <button id="listButton">Todo</button>
+            <div id="listModal">           
+                <div id="todo-list-container">
+                    <div id="todo-list" class="header">
+                        <input type="text" id="listInput" placeholder="New Todo">
+                        <span onclick="newItem()" class="addBtn">Add</span>
+                    </div>
+                    <ul id="todo-list-ul"></ul>
+                </div> 
+            </div>                          
         </div>
         <script src="script.js"></script>
     </body>
